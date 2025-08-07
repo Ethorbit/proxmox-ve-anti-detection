@@ -1,3 +1,5 @@
+**Gaming Is a Right — Even on a Virtual Machine.**
+
 # Other Project
 For QEMU ANTIDECTION, see https://github.com/zhaodice/qemu-anti-detection
 # Proxmox VE(PVE 8.4-1)
