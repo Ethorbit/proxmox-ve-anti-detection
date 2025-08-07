@@ -1,9 +1,9 @@
 # Other Project
 For QEMU ANTIDECTION, see https://github.com/zhaodice/qemu-anti-detection
-# Proxmox VE(PVE 8.1.5-3)
-See https://github.com/zhaodice/proxmox-ve-anti-detection/blob/main/readme-8.1.5-3.md
+# Proxmox VE(PVE 8.4-1)
+See the old https://github.com/zhaodice/proxmox-ve-anti-detection/blob/main/readme-8.1.5-3.md
 
-# Proxmox VE(PVE 8.0.2-3) Anti Detection
+# Proxmox VE(PVE 8.4-1) Anti Detection
  | Type       | Engine | Bypass |
  |------------|--------|--------|
  | AntiCheat | Mhyprot | ☑️   |
@@ -79,12 +79,12 @@ deb https://mirrors.ustc.edu.cn/proxmox/debian/devel bookworm main
 
 
 4.
-(This patch is made at commit 409db0cd7bdc833e4a09d39492b319426029aa92)
+(This patch is made at commit e0969989ac8ba252891a1a178b71e068c8ed4995)
 ```
 apt update
 git clone git://git.proxmox.com/git/pve-qemu.git
 cd pve-qemu
-git reset --hard 409db0cd7bdc833e4a09d39492b319426029aa92
+git reset --hard e0969989ac8ba252891a1a178b71e068c8ed4995
 apt install  devscripts
 mk-build-deps --install
 wget "https://github.com/zhaodice/proxmox-ve-anti-detecion/raw/main/001-anti-detection.patch" -O qemu/001-anti-detection.patch
