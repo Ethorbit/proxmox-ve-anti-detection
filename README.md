@@ -1,7 +1,7 @@
 **Gaming Is a Right — Even on a Virtual Machine.**
 
 # Other Project
-For QEMU ANTIDECTION, see https://github.com/zhaodice/qemu-anti-detection
+For QEMU ANTIDETECTION, see https://github.com/zhaodice/qemu-anti-detection
 # Proxmox VE(PVE 8.4-1)
 See the old https://github.com/zhaodice/proxmox-ve-anti-detection/blob/main/readme-8.1.5-3.md
 
@@ -21,14 +21,9 @@ See the old https://github.com/zhaodice/proxmox-ve-anti-detection/blob/main/read
  | Encrypt | Enigma Protector | ☑️   |  
  | Encrypt | Safegine Shielden | ☑️   |  
 
-‼️ There are games cannot run under this environment but I am not sure whether qemu has been detected, because the game doesn't say "Virtual machine detected" specifically. 
-If you have any clue, feel free to tell me :)
-
-Issue : https://github.com/zhaodice/proxmox-ve-anti-detection/issues/2 (resolved)
-
 Flaws :
 ```
-use those commands could DETECT THIS VM (Shows "No instance available") , and NO SOLOTION CURRENTLY(I Don't know how to simulate thoses infomation..).
+These commands could DETECT THIS VM (Shows "No instance available"), and NO SOLUTION CURRENTLY (I don't know how to simulate that..).
 
 ---------------------------
 
@@ -51,39 +46,46 @@ wmic path CIM_TemperatureSensor get *
 wmic path CIM_VoltageSensor get *
 ```
 
-# Build deb(or download my release ,jump to install section.)
+# Build deb
 
-!!! Create Proxmox VE Virtual Machine as compile enviromnet. !!!
+!!! Create Proxmox VE Virtual Machine as a compile environment. !!!
 
-1.Login System
+1. Login to System
 
 
-2.Remove the old:
+2. Remove the old sources:
 ```
 mv /etc/apt/sources.list /etc/apt/sources.list.deleted
 mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.deleted
 ```
 
 
-3.Add follows into `/etc/apt/sources.list`
+3. Add to `/etc/apt/sources.list`
 ```
-deb https://mirrors.ustc.edu.cn/debian/ bookworm main contrib non-free
-deb https://mirrors.ustc.edu.cn/debian/ bookworm-updates main contrib non-free
-deb https://mirrors.ustc.edu.cn/debian/ bookworm-backports main contrib non-free
-deb https://mirrors.ustc.edu.cn/debian-security bookworm-security main contrib
-#pve源
-deb https://mirrors.ustc.edu.cn/proxmox/debian bookworm pve-no-subscription
-#ceph源
-deb https://mirrors.ustc.edu.cn/proxmox/debian/ceph-pacific bookworm main
-#开发源，必须
-deb https://mirrors.ustc.edu.cn/proxmox/debian/devel bookworm main
+deb http://download.proxmox.com/debian bookworm pve-no-subscription
+
+deb http://ftp.us.debian.org/debian bookworm main contrib non-free
+
+deb http://ftp.us.debian.org/debian bookworm-updates main contrib non-free
+
+# security updates
+deb http://security.debian.org bookworm-security main contrib non-free
 ```
 
+4. Upgrade
+```
+apt update && apt -y full-upgrade
+```
 
-4.
+5. PVE 8.4-1 ISO is not actually quite PVE 8.4.1, so downgrade
+```
+apt install pve-manager=8.4.1
+```
+
+6.
+.
 (This patch is made at commit e0969989ac8ba252891a1a178b71e068c8ed4995)
 ```
-apt update
 git clone git://git.proxmox.com/git/pve-qemu.git
 cd pve-qemu
 git reset --hard e0969989ac8ba252891a1a178b71e068c8ed4995
@@ -92,7 +94,7 @@ mk-build-deps --install
 wget "https://github.com/zhaodice/proxmox-ve-anti-detecion/raw/main/001-anti-detection.patch" -O qemu/001-anti-detection.patch
 ```
 
-5.
+7.
 
 `nano debian/rules`
 
@@ -154,24 +156,24 @@ Inject a line :
 	...
 ```
 
-6 Current folder is `git's root path`.
+8. Current folder is `git's root path`.
 ```
 make clean
 make
 ```
 
-7.You will see a `ERROR` like follows
+9. You will see a `ERROR` like follows
 
 ```
 dpkg-source: info: unapplying 001-anti-detection.patch
-dpkg-source: error: diff pve-qemu-kvm-7.2.0/debian/patches/001-anti-detection.patch modifies file pve-qemu-kvm-7.2.0/subprojects/libvduse/standard-headers/linux/qemu_fw_cfg.h through a symlink: pve-qemu-kvm-7.2.0/subprojects/libvduse/standard-headers/linux
+dpkg-source: error: diff pve-qemu-kvm-9.2.0/debian/patches/001-anti-detection.patch modifies file pve-qemu-kvm-9.2.0/subprojects/libvduse/standard-headers/linux/qemu_fw_cfg.h through a symlink: pve-qemu-kvm-9.2.0/subprojects/libvduse/standard-headers/linux
 dpkg-buildpackage: error: dpkg-source --after-build . subprocess returned exit status 25
-make: *** [Makefile:36: pve-qemu-kvm_7.2.0-8_amd64.deb] Error 25
+make: *** [Makefile:36: pve-qemu-kvm_9.2.0-5_amd64.deb] Error 25
 ```
 
-Due to you edit the `rule` files to patch, so it cannot unapplying extra patch
+This error occurs because you've edited the rules file to apply a patch, but it is not able to remove the patch cleanly.
 
-but it is NO PROBLME, because you will see a patched deb file `pve-qemu-kvm_7.2.0-8_amd64.deb` !
+However, there is NO PROBLEM, because you should still get the patched .deb file: pve-qemu-kvm_9.2.0-5_amd64.deb.
 
 # Install deb
 
@@ -194,9 +196,9 @@ cores: 12
 cpu: host,flags=+pcid
 efidisk0: local-lvm:vm-100-disk-0,efitype=4m,pre-enrolled-keys=1,size=4M
 hostpci0: 0000:01:00,pcie=1,x-vga=1
-machine: pc-q35-7.1
+machine: q35
 memory: 32768
-meta: creation-qemu=7.1.0,ctime=1679627202
+meta: creation-qemu=9.2.0,ctime=1679627202
 name: Windows11
 net0: rtl8139=CA:09:F3:97:56:0B,bridge=vmbr0,firewall=1
 numa: 1
