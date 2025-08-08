@@ -399,7 +399,7 @@ index b644577734..ae7b1d57df 100644
  #define FW_CFG_DMA_CTL_WRITE   0x10
  
 -#define FW_CFG_DMA_SIGNATURE 0x51454d5520434647ULL /* "QEMU CFG" */
-+#define FW_CFG_DMA_SIGNATURE 0x51454d5520434647ULL /* "ASUS CFG" */
++#define FW_CFG_DMA_SIGNATURE 0x4155535520434647ULL /* "ASUS CFG" */
  
  struct FWCfgEntry {
      uint32_t len;
@@ -1029,18 +1029,6 @@ index c5612e16a2..048cb93d3d 100644
  
  enum virtio_scsi_vq_id {
      VR_CONTROL  = 0,
-diff --git a/roms/seabios b/roms/seabios
---- a/roms/seabios
-+++ b/roms/seabios
-@@ -1 +1 @@
--Subproject commit a6ed6b701f0a57db0569ab98b0661c12a6ec3ff8
-+Subproject commit a6ed6b701f0a57db0569ab98b0661c12a6ec3ff8-dirty
-diff --git a/roms/seabios-hppa b/roms/seabios-hppa
---- a/roms/seabios-hppa
-+++ b/roms/seabios-hppa
-@@ -1 +1 @@
--Subproject commit a528f01d7abd511d3cc71b7acaab6e036ee524bd
-+Subproject commit a528f01d7abd511d3cc71b7acaab6e036ee524bd-dirty
 diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
 index 8e17942c3b..d69027e43e 100644
 --- a/target/i386/kvm/kvm.c
