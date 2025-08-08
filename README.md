@@ -91,7 +91,7 @@ cd pve-qemu
 git reset --hard e0969989ac8ba252891a1a178b71e068c8ed4995
 apt install  devscripts
 mk-build-deps --install
-wget "https://github.com/zhaodice/proxmox-ve-anti-detecion/raw/main/001-anti-detection.patch" -O qemu/001-anti-detection.patch
+wget "https://raw.githubusercontent.com/Ethorbit/proxmox-ve-anti-detection/refs/heads/main/001-anti-detection.patch" -O qemu/001-anti-detection.patch
 ```
 
 7.
