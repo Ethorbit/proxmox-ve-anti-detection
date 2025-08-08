@@ -46,7 +46,7 @@ wmic path CIM_TemperatureSensor get *
 wmic path CIM_VoltageSensor get *
 ```
 
-# Build deb (or download my release ,jump to install section.)
+# Build deb (or download [my release](https://github.com/Ethorbit/proxmox-ve-anti-detection/releases))
 
 !!! Create Proxmox VE Virtual Machine as a compile environment. !!!
 
