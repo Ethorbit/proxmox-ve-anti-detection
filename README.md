@@ -21,52 +21,29 @@ See the old https://github.com/zhaodice/proxmox-ve-anti-detection/blob/main/read
  | Encrypt | Enigma Protector | ☑️   |  
  | Encrypt | Safegine Shielden | ☑️   |  
 
-<details open>
-    <summary><h1>READ TO AVOID DETECTION!</h1></summary>  
-
-<ol>
-<li>VirtIO devices can still get detected by their ID fingerprints. This is intentional, as otherwise the VirtIO drivers would not function anymore.</li>
-    
-The burden is on you. <b>You should avoid VirtIO devices as a whole.</b>
-<ul>
-    <li>Pass a real GPU</li>
-    <li>Change disk type to IDE and assign it a convincing serial and model</li>
-    <li>Make sure Ethernet's model is set to Intel E1000</li>
-    <li>Add realistic SMBIOS information</li>
-</ul>
-
-<br>
-
-If you follow the above, no VirtIO fingerprints should be present.
-
-<br>
-
-<li>These Windows commands could DETECT THE VM (Shows "No instance available"), and <b>NO SOLUTION CURRENTLY EXISTS</b> (I don't know how to simulate that..).</li>
-<code>
-wmic path Win32\_Fan get *
-
-wmic path Win32\_CacheMemory get *
-
-wmic path Win32\_VoltageProbe get *
-
-wmic path Win32\_PerfFormattedData\_Counters\_ThermalZoneInformation get *
-
-wmic path CIM\_Memory get *
-
-wmic path CIM\_Sensor get *
-
-wmic path CIM\_NumericSensor get *
-
-wmic path CIM\_TemperatureSensor get *
-
-wmic path CIM\_VoltageSensor get *
-</code>
-</ol>
-</details>
-
+Flaws :
 ```
+These commands could DETECT THIS VM (Shows "No instance available"), and NO SOLUTION CURRENTLY (I don't know how to simulate that..).
 
+---------------------------
 
+wmic path Win32_Fan get *
+
+wmic path Win32_CacheMemory get *
+
+wmic path Win32_VoltageProbe get *
+
+wmic path Win32_PerfFormattedData_Counters_ThermalZoneInformation get *
+
+wmic path CIM_Memory get *
+
+wmic path CIM_Sensor get *
+
+wmic path CIM_NumericSensor get *
+
+wmic path CIM_TemperatureSensor get *
+
+wmic path CIM_VoltageSensor get *
 ```
 
 # Build deb (or download [my release](https://github.com/Ethorbit/proxmox-ve-anti-detection/releases))

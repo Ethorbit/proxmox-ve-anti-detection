@@ -351,6 +351,35 @@ index 45e4d4c75d..65af024e28 100644
  
  /* ----------------------------------------------------------------- */
  
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 9a635d1d3d..30c68ff530 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -594,13 +594,13 @@ static void virt_build_smbios(LoongArchVirtMachineState *lvms)
+     MachineClass *mc = MACHINE_GET_CLASS(lvms);
+     uint8_t *smbios_tables, *smbios_anchor;
+     size_t smbios_tables_len, smbios_anchor_len;
+-    const char *product = "QEMU Virtual Machine";
++    const char *product = "ASUS Real Machine";
+ 
+     if (!lvms->fw_cfg) {
+         return;
+     }
+ 
+-    smbios_set_defaults("QEMU", product, mc->name);
++    smbios_set_defaults("ASUS", product, mc->name);
+ 
+     smbios_get_tables(ms, SMBIOS_ENTRY_POINT_TYPE_64,
+                       NULL, 0,
+@@ -1442,7 +1442,7 @@ static void virt_class_init(ObjectClass *oc, void *data)
+     mc->init = virt_init;
+     mc->default_cpu_type = LOONGARCH_CPU_TYPE_NAME("la464");
+     mc->default_ram_id = "loongarch.ram";
+-    mc->desc = "QEMU LoongArch Virtual Machine";
++    mc->desc = "ASUS LoongArch Real Machine";
+     mc->max_cpus = LOONGARCH_MAX_CPUS;
+     mc->is_default = 1;
+     mc->default_kernel_irqchip_split = false;
 diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
 index ea5c4a5a57..6931a1b167 100644
 --- a/hw/m68k/virt.c
@@ -909,6 +938,93 @@ index 1fb59cf404..7782abfd7a 100644
      dc->vmsd           = &vmstate_u2f_key;
  }
  
+diff --git a/hw/virtio/virtio.c b/hw/virtio/virtio.c
+index f12c4aa81e..4d11bcaa2b 100644
+--- a/hw/virtio/virtio.c
++++ b/hw/virtio/virtio.c
+@@ -156,45 +156,45 @@ struct VirtQueue
+ };
+ 
+ const char *virtio_device_names[] = {
+-    [VIRTIO_ID_NET] = "virtio-net",
+-    [VIRTIO_ID_BLOCK] = "virtio-blk",
+-    [VIRTIO_ID_CONSOLE] = "virtio-serial",
+-    [VIRTIO_ID_RNG] = "virtio-rng",
+-    [VIRTIO_ID_BALLOON] = "virtio-balloon",
+-    [VIRTIO_ID_IOMEM] = "virtio-iomem",
+-    [VIRTIO_ID_RPMSG] = "virtio-rpmsg",
+-    [VIRTIO_ID_SCSI] = "virtio-scsi",
+-    [VIRTIO_ID_9P] = "virtio-9p",
+-    [VIRTIO_ID_MAC80211_WLAN] = "virtio-mac-wlan",
+-    [VIRTIO_ID_RPROC_SERIAL] = "virtio-rproc-serial",
+-    [VIRTIO_ID_CAIF] = "virtio-caif",
+-    [VIRTIO_ID_MEMORY_BALLOON] = "virtio-mem-balloon",
+-    [VIRTIO_ID_GPU] = "virtio-gpu",
+-    [VIRTIO_ID_CLOCK] = "virtio-clk",
+-    [VIRTIO_ID_INPUT] = "virtio-input",
++    [VIRTIO_ID_NET] = "asus-net",
++    [VIRTIO_ID_BLOCK] = "asus-blk",
++    [VIRTIO_ID_CONSOLE] = "asus-serial",
++    [VIRTIO_ID_RNG] = "asus-rng",
++    [VIRTIO_ID_BALLOON] = "asus-balloon",
++    [VIRTIO_ID_IOMEM] = "asus-iomem",
++    [VIRTIO_ID_RPMSG] = "asus-rpmsg",
++    [VIRTIO_ID_SCSI] = "asus-scsi",
++    [VIRTIO_ID_9P] = "asus-9p",
++    [VIRTIO_ID_MAC80211_WLAN] = "asus-mac-wlan",
++    [VIRTIO_ID_RPROC_SERIAL] = "asus-rproc-serial",
++    [VIRTIO_ID_CAIF] = "asus-caif",
++    [VIRTIO_ID_MEMORY_BALLOON] = "asus-mem-balloon",
++    [VIRTIO_ID_GPU] = "asus-gpu",
++    [VIRTIO_ID_CLOCK] = "asus-clk",
++    [VIRTIO_ID_INPUT] = "asus-input",
+     [VIRTIO_ID_VSOCK] = "vhost-vsock",
+-    [VIRTIO_ID_CRYPTO] = "virtio-crypto",
+-    [VIRTIO_ID_SIGNAL_DIST] = "virtio-signal",
+-    [VIRTIO_ID_PSTORE] = "virtio-pstore",
+-    [VIRTIO_ID_IOMMU] = "virtio-iommu",
+-    [VIRTIO_ID_MEM] = "virtio-mem",
+-    [VIRTIO_ID_SOUND] = "virtio-sound",
+-    [VIRTIO_ID_FS] = "virtio-user-fs",
+-    [VIRTIO_ID_PMEM] = "virtio-pmem",
+-    [VIRTIO_ID_RPMB] = "virtio-rpmb",
+-    [VIRTIO_ID_MAC80211_HWSIM] = "virtio-mac-hwsim",
+-    [VIRTIO_ID_VIDEO_ENCODER] = "virtio-vid-encoder",
+-    [VIRTIO_ID_VIDEO_DECODER] = "virtio-vid-decoder",
+-    [VIRTIO_ID_SCMI] = "virtio-scmi",
+-    [VIRTIO_ID_NITRO_SEC_MOD] = "virtio-nitro-sec-mod",
++    [VIRTIO_ID_CRYPTO] = "asus-crypto",
++    [VIRTIO_ID_SIGNAL_DIST] = "asus-signal",
++    [VIRTIO_ID_PSTORE] = "asus-pstore",
++    [VIRTIO_ID_IOMMU] = "asus-iommu",
++    [VIRTIO_ID_MEM] = "asus-mem",
++    [VIRTIO_ID_SOUND] = "asus-sound",
++    [VIRTIO_ID_FS] = "asus-user-fs",
++    [VIRTIO_ID_PMEM] = "asus-pmem",
++    [VIRTIO_ID_RPMB] = "asus-rpmb",
++    [VIRTIO_ID_MAC80211_HWSIM] = "asus-mac-hwsim",
++    [VIRTIO_ID_VIDEO_ENCODER] = "asus-vid-encoder",
++    [VIRTIO_ID_VIDEO_DECODER] = "asus-vid-decoder",
++    [VIRTIO_ID_SCMI] = "asus-scmi",
++    [VIRTIO_ID_NITRO_SEC_MOD] = "asus-nitro-sec-mod",
+     [VIRTIO_ID_I2C_ADAPTER] = "vhost-user-i2c",
+-    [VIRTIO_ID_WATCHDOG] = "virtio-watchdog",
+-    [VIRTIO_ID_CAN] = "virtio-can",
+-    [VIRTIO_ID_DMABUF] = "virtio-dmabuf",
+-    [VIRTIO_ID_PARAM_SERV] = "virtio-param-serv",
+-    [VIRTIO_ID_AUDIO_POLICY] = "virtio-audio-pol",
+-    [VIRTIO_ID_BT] = "virtio-bluetooth",
+-    [VIRTIO_ID_GPIO] = "virtio-gpio"
++    [VIRTIO_ID_WATCHDOG] = "asus-watchdog",
++    [VIRTIO_ID_CAN] = "asus-can",
++    [VIRTIO_ID_DMABUF] = "asus-dmabuf",
++    [VIRTIO_ID_PARAM_SERV] = "asus-param-serv",
++    [VIRTIO_ID_AUDIO_POLICY] = "asus-audio-pol",
++    [VIRTIO_ID_BT] = "asus-bluetooth",
++    [VIRTIO_ID_GPIO] = "asus-gpio"
+ };
+ 
+ static const char *virtio_id_to_name(uint16_t device_id)
 diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
 index 4fd5da49e7..3e3055bf54 100644
 --- a/include/hw/acpi/aml-build.h
@@ -924,6 +1040,32 @@ index 4fd5da49e7..3e3055bf54 100644
  
  #define ACPI_BUILD_TABLE_FILE "etc/acpi/tables"
  #define ACPI_BUILD_RSDP_FILE "etc/acpi/rsdp"
+diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
+index c0717e3121..593de6e46f 100644
+--- a/include/hw/pci/pci.h
++++ b/include/hw/pci/pci.h
+@@ -73,9 +73,9 @@ extern bool pci_available;
+ #define PCI_DEVICE_ID_INTEL_82801IR      0x2922
+ 
+ /* Red Hat / Qumranet (for QEMU) -- see pci-ids.txt */
+-#define PCI_VENDOR_ID_REDHAT_QUMRANET    0x1af4
+-#define PCI_SUBVENDOR_ID_REDHAT_QUMRANET 0x1af4
+-#define PCI_SUBDEVICE_ID_QEMU            0x1100
++#define PCI_VENDOR_ID_REDHAT_QUMRANET    0x8086
++#define PCI_SUBVENDOR_ID_REDHAT_QUMRANET 0x8086
++#define PCI_SUBDEVICE_ID_QEMU            0x8086
+ 
+ /* legacy virtio-pci devices */
+ #define PCI_DEVICE_ID_VIRTIO_NET         0x1000
+@@ -96,7 +96,7 @@ extern bool pci_available;
+  */
+ #define PCI_DEVICE_ID_VIRTIO_10_BASE     0x1040
+ 
+-#define PCI_VENDOR_ID_REDHAT             0x1b36
++#define PCI_VENDOR_ID_REDHAT             0x8086
+ #define PCI_DEVICE_ID_REDHAT_BRIDGE      0x0001
+ #define PCI_DEVICE_ID_REDHAT_SERIAL      0x0002
+ #define PCI_DEVICE_ID_REDHAT_SERIAL2     0x0003
 diff --git a/include/standard-headers/linux/qemu_fw_cfg.h b/include/standard-headers/linux/qemu_fw_cfg.h
 index cb93f6678d..f5f97cde95 100644
 --- a/include/standard-headers/linux/qemu_fw_cfg.h
